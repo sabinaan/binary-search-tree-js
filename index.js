@@ -12,10 +12,12 @@ class Tree{
     }
 
     buildTree(array){
-        // Sort array
-        // Remove duplicates
-        let n = array.length
-        let root = this.arrayToBTS(array, 0, n - 1)
+        let uniqueValuesArr = removeDuplicates(array)
+        console.log(uniqueValuesArr)
+        let sortedUniqueArr = sortArray(uniqueValuesArr)
+        console.log(sortedUniqueArr)
+        let n = sortedUniqueArr.length
+        let root = this.arrayToBTS(sortedUniqueArr, 0, n - 1)
         return root
     }
 
@@ -30,13 +32,28 @@ class Tree{
         return node
     }
 
+
     showRoot(){
         console.log(this.root)
     }
 
 }
 
+function sortArray(array){
+    const sorted = array.sort((a, b) => a - b)
+    return sorted
+}
 
-let testArray = [1, 4, 3, 5, 8, 9, 67, 324]
+function removeDuplicates(array){
+    let uniqeValuesArray = array.reduce(function(acc, current) {
+        if (!acc.includes(current)){
+            acc.push(current)
+        } 
+        return acc
+    }, [])
+    return uniqeValuesArray
+}
+
+let testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 let newTree = new Tree(testArray)
 newTree.showRoot()
