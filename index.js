@@ -17,7 +17,7 @@ class Tree{
         let sortedUniqueArr = sortArray(uniqueValuesArr)
         console.log(sortedUniqueArr)
         let n = sortedUniqueArr.length
-        let root = this.arrayToBTS(sortedUniqueArr, 0, n - 1)
+        let root = this.arrayToBTS(sortedUniqueArr, 0, n - 1)    
         return root
     }
 
@@ -32,11 +32,21 @@ class Tree{
         return node
     }
 
+    insert(value,currentNode = this.root){
+        if (currentNode == null){
+            currentNode = new Node(value)
+        }
+        if (value < currentNode.value){
+                this.insert(value, currentNode.left)
+        }else if (value > currentNode.value){
+                this.insert(value, currentNode.right)
+        }
+    }
 
     showRoot(){
         console.log(this.root)
     }
-
+    
 }
 
 function sortArray(array){
@@ -54,6 +64,28 @@ function removeDuplicates(array){
     return uniqeValuesArray
 }
 
+const prettyPrint = (node, prefix = "", isLeft = true) => {
+    if (node === null) {
+      return;
+    }
+    if (node.right !== null) {
+      prettyPrint(node.right, `${prefix}${isLeft ? "│   " : "    "}`, false);
+    }
+    console.log(`${prefix}${isLeft ? "└── " : "┌── "}${node.value}`);
+    if (node.left !== null) {
+      prettyPrint(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
+    }
+  };
+
+
+
+
 let testArray = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324]
 let newTree = new Tree(testArray)
-newTree.showRoot()
+prettyPrint(newTree.root)
+newTree.insert(2)
+prettyPrint(newTree.root)
+newTree.insert(232)
+prettyPrint(newTree.root)
+newTree.insert(67)
+prettyPrint(newTree.root)
