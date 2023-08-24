@@ -42,11 +42,23 @@ class Tree{
                 this.insert(value, currentNode.right)
         }
     }
+ 
+    
+    find(value, node = this.root){
+        if(node == null || value == node.value){
+            return node
+        }
+        if(value < node.value){
+            return this.find(value, node.left)
+        }
+        return this.find(value, node.right)
+
+    }
 
     showRoot(){
         console.log(this.root)
     }
-    
+
 }
 
 function sortArray(array){
@@ -89,3 +101,6 @@ newTree.insert(232)
 prettyPrint(newTree.root)
 newTree.insert(67)
 prettyPrint(newTree.root)
+
+console.log(newTree.find(23))
+console.log(newTree.find(4))
