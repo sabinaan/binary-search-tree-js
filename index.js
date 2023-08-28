@@ -92,6 +92,23 @@ class Tree{
         return this.find(value, node.right)
     }
 
+    levelOrder(func){
+        if (this.root == null) return
+        let queue = [this.root]
+        let result = []
+        while (queue.length !== 0){
+            let first = queue.shift()
+            
+            if (first.left != null) queue.push(first.left)
+            if (first.right != null) queue.push(first.right)
+
+            result.push(first.value)
+            
+            if (func) func(first)
+        }
+        if (!func) return result
+    }
+
     showRoot(){
         console.log(this.root)
     }
@@ -146,3 +163,5 @@ newTree.delete(1)
 prettyPrint(newTree.root)
 newTree.delete(4)
 prettyPrint(newTree.root)
+newTree.levelOrder((element) => console.log(element.value))
+console.log(newTree.levelOrder())
