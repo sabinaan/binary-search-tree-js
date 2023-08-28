@@ -13,9 +13,7 @@ class Tree{
 
     buildTree(array){
         let uniqueValuesArr = removeDuplicates(array)
-        console.log(uniqueValuesArr)
         let sortedUniqueArr = sortArray(uniqueValuesArr)
-        console.log(sortedUniqueArr)
         let n = sortedUniqueArr.length
         let root = this.arrayToBTS(sortedUniqueArr, 0, n - 1)    
         return root
@@ -43,6 +41,46 @@ class Tree{
         }
     }
  
+    delete(value,node = this.root){
+        if (node == null){
+            return node
+        }
+            
+        if (value < node.value) {
+            node.left = this.delete(value, node.left)
+            return node
+        }else if (value > node.value){
+            node.right = this.delete(value, node.right)
+            return node
+        }
+
+        //if one or both children are empty
+        if(node.left == null){
+            return node.right
+        } else if (node.right == null){
+            return node.left
+
+        //if both children exists
+        }else {
+            let succParent = node;
+            let succ = node.right;
+
+            while (succ.left != null){
+                succParent = succ;
+                succ = succ.left
+            }
+            
+            if(succParent !== node){
+                succParent.left = succ.right
+            }else{
+                succParent.right = succ.right
+            }
+            node.value = succ.value
+            return node
+
+        }
+
+    }
     
     find(value, node = this.root){
         if(node == null || value == node.value){
@@ -52,7 +90,6 @@ class Tree{
             return this.find(value, node.left)
         }
         return this.find(value, node.right)
-
     }
 
     showRoot(){
@@ -104,3 +141,8 @@ prettyPrint(newTree.root)
 
 console.log(newTree.find(23))
 console.log(newTree.find(4))
+
+newTree.delete(1)
+prettyPrint(newTree.root)
+newTree.delete(4)
+prettyPrint(newTree.root)
