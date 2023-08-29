@@ -30,7 +30,7 @@ class Tree{
         return node
     }
 
-    insert(value,currentNode = this.root){
+    insert(value, currentNode = this.root){
         if (currentNode == null){
             currentNode = new Node(value)
         }
@@ -142,6 +142,20 @@ class Tree{
         if (!func) return array
     }
 
+    height(node){
+        if (node == null) return 0
+
+        let leftDepth = this.height(node.left)
+        let rightDepth = this.height(node.right)
+
+        if (leftDepth > rightDepth){
+            return leftDepth + 1
+        }else{
+            return rightDepth + 1
+        }
+
+    }
+
     showRoot(){
         console.log(this.root)
     }
@@ -184,22 +198,24 @@ let newTree = new Tree(testArray)
 prettyPrint(newTree.root)
 
 //insert
+console.log("insert 2")
 newTree.insert(2)
 prettyPrint(newTree.root)
-newTree.insert(232)
-prettyPrint(newTree.root)
-newTree.insert(67)
-prettyPrint(newTree.root)
+//newTree.insert(232)
+//prettyPrint(newTree.root)
+//newTree.insert(6700)
+//prettyPrint(newTree.root)
 
 //find
-console.log(newTree.find(23))
-console.log(newTree.find(4))
+//console.log(newTree.find(23))
+//console.log(newTree.find(4))
 
 //delete
+console.log("delete 1")
 newTree.delete(1)
 prettyPrint(newTree.root)
-newTree.delete(4)
-prettyPrint(newTree.root)
+//newTree.delete(4)
+//prettyPrint(newTree.root)
 
 
 let traversalTree  = new Tree([1,2,3,4,5,6,7])
@@ -207,23 +223,25 @@ prettyPrint(traversalTree.root)
 
 //level order
 console.log("level order")
-traversalTree.levelOrder((element) => console.log(element.value))
+//traversalTree.levelOrder((element) => console.log(element.value))
 console.log(traversalTree.levelOrder())
 
 //inorder
 console.log("inorder")
 console.log(traversalTree.inorder())
-traversalTree.inorder((element) => console.log(element.value))
+//traversalTree.inorder((element) => console.log(element.value))
 
 //preorder
 console.log("preorder")
 console.log(traversalTree.preorder())
-traversalTree.preorder((element) => console.log(element.value))
+//traversalTree.preorder((element) => console.log(element.value))
 
 
 //postorder
 console.log("postorder")
 console.log(traversalTree.postorder())
-traversalTree.postorder((element) => console.log(element.value))
+//traversalTree.postorder((element) => console.log(element.value))
+
+console.log("height of tree: " + newTree.height(newTree.root))
 
 
