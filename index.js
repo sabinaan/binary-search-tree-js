@@ -33,12 +33,14 @@ class Tree{
     insert(value, currentNode = this.root){
         if (currentNode == null){
             currentNode = new Node(value)
+            return currentNode
         }
         if (value < currentNode.value){
-                this.insert(value, currentNode.left)
+                currentNode.left = this.insert(value, currentNode.left)
         }else if (value > currentNode.value){
-                this.insert(value, currentNode.right)
+                currentNode.right = this.insert(value, currentNode.right)
         }
+        return currentNode
     }
  
     delete(value,node = this.root){
@@ -218,6 +220,8 @@ prettyPrint(newTree.root)
 //prettyPrint(newTree.root)
 
 
+
+
 let traversalTree  = new Tree([1,2,3,4,5,6,7])
 prettyPrint(traversalTree.root)
 
@@ -242,6 +246,8 @@ console.log("postorder")
 console.log(traversalTree.postorder())
 //traversalTree.postorder((element) => console.log(element.value))
 
+console.log("height of tree: " + newTree.height(newTree.root))
+newTree.insert(8000)
 console.log("height of tree: " + newTree.height(newTree.root))
 
 
