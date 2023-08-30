@@ -167,6 +167,19 @@ class Tree{
         } 
     }
 
+    isBalanced(root = this.root){
+        if (root == null) return true
+        let lHeight = this.height(root.left)
+        let rHeight = this.height(root.right)
+        let difference = Math.abs(lHeight - rHeight)
+
+        if (difference <= 1 && this.isBalanced(root.left) && this.isBalanced(root.right)) {
+            return true
+        } 
+        return false
+
+    }
+
     showRoot(){
         console.log(this.root)
     }
@@ -261,5 +274,10 @@ console.log("height of tree: " + newTree.height(newTree.root))
 
 console.log(newTree.depth(newTree.find(7)))
 console.log(newTree.depth(newTree.find(9)))
+
+prettyPrint(newTree.root)
+
+console.log(newTree.isBalanced())
+console.log(traversalTree.isBalanced())
 
 
