@@ -180,6 +180,11 @@ class Tree{
 
     }
 
+    rebalance(){
+        let currentTreeArray = this.levelOrder() 
+        this.root = this.buildTree(currentTreeArray)
+    }
+
     showRoot(){
         console.log(this.root)
     }
@@ -280,4 +285,6 @@ prettyPrint(newTree.root)
 console.log(newTree.isBalanced())
 console.log(traversalTree.isBalanced())
 
+newTree.rebalance()
+prettyPrint(newTree.root)
 
