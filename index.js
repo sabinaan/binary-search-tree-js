@@ -158,6 +158,15 @@ class Tree{
 
     }
 
+    depth(node, root = this.root){
+        if (root.value == node.value) return 0
+        if (root.value > node.value){
+            return this.depth(node, root.left) +1
+        } else{
+            return this.depth(node, root.right) +1
+        } 
+    }
+
     showRoot(){
         console.log(this.root)
     }
@@ -249,5 +258,8 @@ console.log(traversalTree.postorder())
 console.log("height of tree: " + newTree.height(newTree.root))
 newTree.insert(8000)
 console.log("height of tree: " + newTree.height(newTree.root))
+
+console.log(newTree.depth(newTree.find(7)))
+console.log(newTree.depth(newTree.find(9)))
 
 
